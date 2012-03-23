@@ -16,12 +16,12 @@ $app->run();
 Cilex works with PHP 5.3.2 or later and is heavily inspired on the [Silex][2]
 web micro-framework by Fabien Potencier.
 
-<!--
 ## Installation
 
 Installing Cilex is as easy as it can get. Download the [`cilex.phar`][3] file
 and you're done!
 
+<!--
 ## More Information
 
 Read the [documentation][4] for more information.
