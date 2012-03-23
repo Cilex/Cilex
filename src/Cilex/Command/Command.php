@@ -22,7 +22,9 @@ use \Symfony\Component\Console;
  */
 abstract class Command extends Console\Command\Command
 {
-    /** @var \Cilex\Application */
+    /**
+     * @var \Cilex\Application
+     */
     protected $container = null;
 
     /**

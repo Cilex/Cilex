@@ -23,7 +23,9 @@ use \Symfony\Component\ClassLoader\UniversalClassLoader;
  */
 class Application extends \Pimple
 {
-    /** @var int Version number for Cilex */
+    /**
+     * Version number for Cilex
+     */
     const VERSION = '1.0.0';
 
     /**
@@ -55,8 +57,7 @@ class Application extends \Pimple
     public function run($interactive = false)
     {
         $app = $this['console'];
-        if ($interactive)
-        {
+        if ($interactive) {
             $app = new Console\Shell($app);
         }
 
