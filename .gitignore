@@ -2,3 +2,5 @@ vendor
 phpunit.xml
 cilex.phar
 .idea
+composer.lock
+composer.phar
