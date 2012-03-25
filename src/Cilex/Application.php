@@ -84,13 +84,23 @@ class Application extends \Pimple
     /**
      * Registers a service provider.
      *
-     * @param ServiceProviderInterface $provider A ServiceProviderInterface instance
-     * @param mixed[]                  $values   An array of values that customizes the provider
+     * @param \Cilex\ServiceProviderInterface|\Silex\ServiceProviderInterface $provider 
+     *     A ServiceProviderInterface instance
+     * @param mixed[]                                                         $values   
+     *     An array of values that customizes the provider
      *
      * @return void
      */
-    public function register(ServiceProviderInterface $provider, array $values = array())
+    public function register($provider, array $values = array())
     {
+        if ((!$provider instanceof \Cilex\ServiceProviderInterface) 
+            || (!$provider instanceof \Silex\ServiceProviderInterface)
+        ) {
+            throw new \InvalidArgumentException(
+                'Extensions should implement either Cilex or Silex\' ServiceProviderInterface'
+            );
+        }
+
         foreach ($values as $key => $value) {
             $this[$key] = $value;
         }
