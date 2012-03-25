@@ -94,7 +94,7 @@ class Application extends \Pimple
     public function register($provider, array $values = array())
     {
         if ((!$provider instanceof \Cilex\ServiceProviderInterface) 
-            || (!$provider instanceof \Silex\ServiceProviderInterface)
+            && (!$provider instanceof \Silex\ServiceProviderInterface)
         ) {
             throw new \InvalidArgumentException(
                 'Extensions should implement either Cilex or Silex\' ServiceProviderInterface'
