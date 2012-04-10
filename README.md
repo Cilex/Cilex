@@ -9,7 +9,7 @@ based on [Symfony2][1] components:
 require_once __DIR__.'/cilex.phar';
 
 $app = new \Cilex\Application('Cilex');
-$app->command(new \Cilex\Command\DemoGreetCommand());
+$app->command(new \Cilex\Command\GreetCommand());
 $app->run();
 ```
 
