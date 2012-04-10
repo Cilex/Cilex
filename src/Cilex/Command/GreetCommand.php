@@ -35,7 +35,7 @@ class GreetCommand extends Command
         $text = 'Hello';
         $name = $input->getArgument('name');
         if ($name) {
-            $text .= $name;
+            $text .= ' '.$name;
         }
 
         if ($input->getOption('yell')) {
