@@ -20,6 +20,12 @@ class ConfigServiceProvider implements ServiceProviderInterface
     public function register(Application $app)
     {
         $app['config'] = $app->share(function () use ($app) {
+            if (!file_exists($app['config.path'])) {
+                throw new \InvalidArgumentException(
+                    $app['config.path'] . ' is not a valid path to the '
+                    .'configuration'
+                );
+            }
 
             $fullpath = explode('.', $app['config.path']);
 
