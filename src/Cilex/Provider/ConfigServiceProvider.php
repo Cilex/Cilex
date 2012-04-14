@@ -20,7 +20,10 @@ class ConfigServiceProvider implements ServiceProviderInterface
     public function register(Application $app)
     {
         $app['config'] = $app->share(function () use ($app) {
-            switch (strtolower(end(explode('.', $app['config.path'])))) {
+
+            $fullpath = explode('.', $app['config.path']);
+
+            switch (strtolower(end($fullpath))) {
                 case 'yml':
                     $parser = new Yaml\Parser();
                     $result = new \ArrayObject(
