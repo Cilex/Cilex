@@ -61,10 +61,5 @@ class MonologServiceProvider implements ServiceProviderInterface
         {
             $app['autoloader']->registerNamespace('Monolog', $app['monolog.class_path']);
         }
-
-        $app->error(function (\Exception $e) use ($app)
-        {
-            $app['monolog']->addError($e->getMessage());
-        });
     }
 }
