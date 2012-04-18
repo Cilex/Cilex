@@ -17,7 +17,7 @@
         "symfony/console":      "2.1.*",
 
         "symfony/process":      "2.1.*",
-        "symfony/finder":       "2.1.*",
+        "symfony/finder":       "2.1.*"
     },
     "suggest":{
         "monolog/monolog":   ">=1.0.0",
