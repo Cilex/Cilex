@@ -113,7 +113,7 @@ class Compiler
 
 Phar::mapPhar('cilex.phar');
 
-require_once 'phar://cilex.phar/vendor/.composer/autoload.php';
+require_once 'phar://cilex.phar/vendor/autoload.php';
 
 if ('cli' === php_sapi_name() && basename(__FILE__) === basename($_SERVER['argv'][0]) && isset($_SERVER['argv'][1])) {
     switch ($_SERVER['argv'][1]) {
