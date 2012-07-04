@@ -27,6 +27,7 @@ class ServiceProviderMock implements \Cilex\ServiceProviderInterface
      */
     function register(\Cilex\Application $app)
     {
+        $app['mock.param'] = false;
         $app['mock'] = $this;
     }
 }
