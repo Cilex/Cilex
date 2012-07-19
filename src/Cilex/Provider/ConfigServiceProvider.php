@@ -33,7 +33,7 @@ class ConfigServiceProvider implements ServiceProviderInterface
                 case 'yml':
                     $parser = new Yaml\Parser();
                     $result = new \ArrayObject(
-                        $parser->parse($app['config.path'])
+                        $parser->parse(file_get_contents($app['config.path']))
                     );
                     break;
                 case 'xml':
