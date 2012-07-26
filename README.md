@@ -18,8 +18,10 @@ web micro-framework by Fabien Potencier.
 
 ## Installation
 
-Installing Cilex is as easy as it can get. Download the [`cilex.phar`][3] file
-and you're done!
+ 1. `git clone` _this_ repository.
+ 2. Download composer: `curl -s https://getcomposer.org/installer | php`
+ 3. Install Cilex' dependencies: `php composer.phar install`
+ 4. Create the phar: `php ./compile`
 
 <!--
 ## More Information
