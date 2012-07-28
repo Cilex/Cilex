@@ -1,6 +1,11 @@
 #!/usr/bin/env php
 <?php
-require_once __DIR__.'/vendor/autoload.php';
+$autoload = __DIR__ . '/vendor/autoload.php';
+if (!file_exists($autoload)) {
+    echo "Please run `php composer.phar install` first." . PHP_EOL;
+    exit(1);
+}
+require_once $autoload;
 
 use Cilex\Compiler;
 
