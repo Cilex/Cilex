@@ -18,6 +18,9 @@
         "symfony/process":      "2.1.*",
         "symfony/finder":       "2.1.*"
     },
+    "require-dev":{
+        "symfony/validator": "2.1.*"
+    },
     "suggest":{
         "monolog/monolog":   ">=1.0.0",
         "symfony/yaml":      ">=1.0.0",
