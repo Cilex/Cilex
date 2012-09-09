@@ -101,10 +101,10 @@ class Application extends \Pimple
             );
         }
 
+        $provider->register($this);
+
         foreach ($values as $key => $value) {
             $this[$key] = $value;
         }
-
-        $provider->register($this);
     }
 }
