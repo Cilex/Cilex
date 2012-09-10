@@ -36,12 +36,6 @@ class Application extends \Pimple
      */
     function __construct($name, $version = null)
     {
-        $this['autoloader'] = $this->share(function () {
-            $loader = new UniversalClassLoader();
-            $loader->register();
-            return $loader;
-        });
-
         $this['console'] = $this->share(function () use ($name, $version) {
             return new Console\Application($name, $version);
         });
@@ -84,16 +78,16 @@ class Application extends \Pimple
     /**
      * Registers a service provider.
      *
-     * @param \Cilex\ServiceProviderInterface|\Silex\ServiceProviderInterface $provider 
+     * @param \Cilex\ServiceProviderInterface|\Silex\ServiceProviderInterface $provider
      *     A ServiceProviderInterface instance
-     * @param mixed[]                                                         $values   
+     * @param mixed[]                                                         $values
      *     An array of values that customizes the provider
      *
      * @return void
      */
     public function register($provider, array $values = array())
     {
-        if ((!$provider instanceof \Cilex\ServiceProviderInterface) 
+        if ((!$provider instanceof \Cilex\ServiceProviderInterface)
             && (!$provider instanceof \Silex\ServiceProviderInterface)
         ) {
             throw new \InvalidArgumentException(

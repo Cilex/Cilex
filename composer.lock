@@ -1,5 +1,5 @@
 {
-    "hash": "98dde060b62e60834350b27bf7d7ef60",
+    "hash": "f27efa0dabd34c1389058ea4c64e2e97",
     "packages": [
         {
             "package": "pimple/pimple",
@@ -12,10 +12,6 @@
             "version": "dev-master",
             "source-reference": "b9f27b8dc18c08f00627dec02359b46a24791dc3",
             "commit-date": "1347278988"
-        },
-        {
-            "package": "symfony/class-loader",
-            "version": "v2.1.0"
         },
         {
             "package": "symfony/console",
@@ -36,7 +32,12 @@
             "commit-date": "1346330945"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+        {
+            "package": "symfony/validator",
+            "version": "v2.1.0"
+        }
+    ],
     "aliases": [
 
     ],

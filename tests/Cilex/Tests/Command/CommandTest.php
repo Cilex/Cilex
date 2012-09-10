@@ -57,8 +57,8 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $this->fixture->setContainer($app);
 
         $this->assertInstanceOf(
-            '\Symfony\Component\ClassLoader\UniversalClassLoader',
-            $app['autoloader']
+            '\Symfony\Component\Console\Application',
+            $app['console']
         );
     }
 }

@@ -63,10 +63,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             '\\Symfony\\Component\\Console\\Application',
             $this->fixture['console']
         );
-        $this->assertInstanceOf(
-            '\Symfony\Component\ClassLoader\UniversalClassLoader',
-            $this->fixture['autoloader']
-        );
 
         $this->assertEquals(self::NAME, $this->fixture['console']->getName());
         $this->assertEquals(self::VERSION, $this->fixture['console']->getVersion());
