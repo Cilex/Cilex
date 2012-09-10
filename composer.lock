@@ -3,33 +3,19 @@
     "packages": [
         {
             "package": "pimple/pimple",
-            "version": "dev-master",
-            "alias-pretty-version": "1.0.x-dev",
-            "alias-version": "1.0.9999999.9999999-dev"
-        },
-        {
-            "package": "pimple/pimple",
-            "version": "dev-master",
-            "source-reference": "b9f27b8dc18c08f00627dec02359b46a24791dc3",
-            "commit-date": "1347278988"
+            "version": "1.0.0"
         },
         {
             "package": "symfony/console",
-            "version": "2.1.x-dev",
-            "source-reference": "v2.1.0",
-            "commit-date": "1345643321"
+            "version": "v2.1.0"
         },
         {
             "package": "symfony/finder",
-            "version": "2.1.x-dev",
-            "source-reference": "v2.1.0",
-            "commit-date": "1345643321"
+            "version": "v2.1.0"
         },
         {
             "package": "symfony/process",
-            "version": "2.1.x-dev",
-            "source-reference": "v2.1.0",
-            "commit-date": "1346330945"
+            "version": "v2.1.0"
         }
     ],
     "packages-dev": [
