@@ -15,7 +15,8 @@
         "pimple/pimple":        "1.0.*",
         "symfony/console":      "2.1.*",
         "symfony/process":      "2.1.*",
-        "symfony/finder":       "2.1.*"
+        "symfony/finder":       "2.1.*",
+        "symfony/class-loader": "2.1.*"
     },
     "require-dev":{
         "symfony/validator": "2.1.*"
