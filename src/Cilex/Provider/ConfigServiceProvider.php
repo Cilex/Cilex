@@ -30,6 +30,9 @@ class ConfigServiceProvider implements ServiceProviderInterface
             $fullpath = explode('.', $app['config.path']);
 
             switch (strtolower(end($fullpath))) {
+                case 'php':
+                    $result = include($app['config.path']);
+                    break;
                 case 'yml':
                     $parser = new Yaml\Parser();
                     $result = new \ArrayObject(
