@@ -69,6 +69,33 @@ class ConfigServiceProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test that the config provider can throw an exception if
+     * the json configuration file is invalid
+     *
+     * @return void
+     */
+    public function testRegisterThrowsExceptionInCaseOfInvalidJsonConfigFile()
+    {
+        $configPath = __DIR__.'/../../../data/config-invalid.json';
+
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Unable to decode the configuration file: ' . $configPath
+        );
+
+        $app = new Application('Test');
+
+        $app->register(
+            new ConfigServiceProvider(),
+            array(
+                'config.path' =>  $configPath
+            )
+        );
+
+        $config = $app['config'];
+    }
+
+    /**
      * Test that register will throw an exception if an unknown
      * format is passed in
      *
