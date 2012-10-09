@@ -53,7 +53,7 @@ class ConfigServiceProvider implements ServiceProviderInterface
                 default:
                     throw new \InvalidArgumentException(
                         'Unable to load configuration; the provided file '
-                        .'extension was not recognized. Only yml or xml allowed'
+                        .'extension was not recognized. Only yml, xml or json allowed'
                     );
             }
 

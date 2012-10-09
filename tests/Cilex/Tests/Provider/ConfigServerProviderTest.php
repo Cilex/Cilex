@@ -105,7 +105,7 @@ class ConfigServiceProviderTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Unable to load configuration; the provided file extension was not recognized. Only yml or xml allowed'
+            'Unable to load configuration; the provided file extension was not recognized. Only yml, xml or json allowed'
         );
 
         $app = new Application('Test');
