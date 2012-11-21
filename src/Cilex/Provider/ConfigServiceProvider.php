@@ -44,13 +44,22 @@ class ConfigServiceProvider implements ServiceProviderInterface
                     break;
                 case 'json':
                     $result = json_decode(file_get_contents($app['config.path']));
+
+                    if (null == $result) {
+
+                        throw new \InvalidArgumentException(
+                            'Unable to decode the configuration file: ' . $app['config.path']
+                        );
+                    }
+
                     break;
                 default:
                     throw new \InvalidArgumentException(
                         'Unable to load configuration; the provided file '
-                        .'extension was not recognized. Only yml or xml allowed'
+                        .'extension was not recognized. Only yml, xml or json allowed'
                     );
             }
+
             return $result;
         });
     }
