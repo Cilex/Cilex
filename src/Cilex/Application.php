@@ -12,6 +12,7 @@
 namespace Cilex;
 
 use \Symfony\Component\Console;
+use \Cilex\Pimple\Provider\Console\Adapter\Cilex\ConsoleServiceProvider;
 
 /**
  * The Cilex framework class.
@@ -35,11 +36,13 @@ class Application extends \Pimple
      */
     public function __construct($name, $version = null)
     {
-        $this['console'] = $this->share(
-            function () use ($name, $version) {
-                return new Console\Application($name, $version);
-            }
+        $consoleConfig = array(
+            'console.name' => $name,
         );
+        if (null !== $version) {
+            $consoleConfig['console.version'] = $version;
+        }
+        $this->register(new ConsoleServiceProvider, $consoleConfig);
     }
 
     /**
@@ -70,9 +73,8 @@ class Application extends \Pimple
      *
      * @return void
      */
-    public function command(Command\Command $command)
+    public function command(Console\Command\Command $command)
     {
-        $command->setContainer($this);
         $this['console']->add($command);
     }
 

@@ -23,30 +23,13 @@ use \Symfony\Component\Console;
 abstract class Command extends Console\Command\Command
 {
     /**
-     * @var \Cilex\Application
-     */
-    protected $container = null;
-
-    /**
-     * Sets the application container containing all services.
-     *
-     * @param \Cilex\Application $container Application object to register.
-     *
-     * @return void
-     */
-    public function setContainer(\Cilex\Application $container)
-    {
-        $this->container = $container;
-    }
-
-    /**
      * Returns the application container.
      *
      * @return \Cilex\Application
      */
     public function getContainer()
     {
-        return $this->container;
+        return $this->getApplication()->getContainer();
     }
 
     /**
@@ -67,6 +50,6 @@ abstract class Command extends Console\Command\Command
      */
     public function getService($name)
     {
-        return isset($this->container[$name]) ? $this->container[$name] : null;
+        return $this->getApplication()->getService($name);
     }
 }
