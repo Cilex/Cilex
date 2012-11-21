@@ -68,6 +68,20 @@ class ConfigServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($config->key, 'value');
     }
 
+    public function testCanParseAPhpConfigFile()
+    {
+        $app = new Application('Test');
+
+        $app->register(
+            new ConfigServiceProvider(),
+            array(
+                'config.path' => __DIR__.'/../../../data/config.php'
+            )
+        );
+        $config = $app['config'];
+        $this->assertEquals($config['key'], 'value');
+    }
+
     /**
      * Test that register will throw an exception if an unknown
      * format is passed in
