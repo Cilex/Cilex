@@ -55,8 +55,7 @@ class Compiler
             ->notName('Compiler.php')
             ->in(__DIR__.'/..')
             ->in(__DIR__.'/../../vendor/pimple/pimple/lib')
-            ->in(__DIR__.'/../../vendor/symfony/console/Symfony/Component/Console')
-        ;
+            ->in(__DIR__.'/../../vendor/symfony/console/Symfony/Component/Console');
 
         foreach ($finder as $file) {
             $this->addFile($phar, $file);
@@ -82,9 +81,7 @@ class Compiler
 
     protected function addFile(\Phar $phar, \splFileInfo $file, $strip = true)
     {
-        $path = str_replace(
-            dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR, '', $file->getRealPath()
-        );
+        $path = str_replace(dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR, '', $file->getRealPath());
 
         $content = file_get_contents($file);
         if ($strip) {
@@ -156,7 +153,7 @@ EOF;
      *
      * @return string The PHP string with the whitespace removed
      */
-    static public function stripWhitespace($source)
+    public static function stripWhitespace($source)
     {
         if (!function_exists('token_get_all')) {
             return $source;

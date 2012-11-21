@@ -30,35 +30,32 @@ class MonologServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        $app['monolog'] = $app->share(function () use ($app)
-        {
-            $log = new Logger(isset($app['monolog.name']) ? $app['monolog.name'] : 'myapp');
+        $app['monolog'] = $app->share(
+            function () use ($app) {
+                $log = new Logger(isset($app['monolog.name']) ? $app['monolog.name'] : 'myapp');
+                $app['monolog.configure']($log);
 
-            $app['monolog.configure']($log);
+                return $log;
+            }
+        );
 
-            return $log;
-        });
+        $app['monolog.configure'] = $app->protect(
+            function ($log) use ($app) {
+                $log->pushHandler($app['monolog.handler']);
+            }
+        );
 
-        $app['monolog.configure'] = $app->protect(function ($log) use ($app)
-        {
-            $log->pushHandler($app['monolog.handler']);
-        });
-
-        $app['monolog.handler'] = function () use ($app)
-        {
+        $app['monolog.handler'] = function () use ($app) {
             return new StreamHandler($app['monolog.logfile'], $app['monolog.level']);
         };
 
-        if (!isset($app['monolog.level']))
-        {
-            $app['monolog.level'] = function ()
-            {
+        if (!isset($app['monolog.level'])) {
+            $app['monolog.level'] = function () {
                 return Logger::DEBUG;
             };
         }
 
-        if (isset($app['monolog.class_path']))
-        {
+        if (isset($app['monolog.class_path'])) {
             $app['autoloader']->registerNamespace('Monolog', $app['monolog.class_path']);
         }
     }

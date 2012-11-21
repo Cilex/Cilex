@@ -23,5 +23,5 @@ interface ServiceProviderInterface
      *
      * @param Application $app An Application instance
      */
-    function register(Application $app);
+    public function register(Application $app);
 }

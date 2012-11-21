@@ -12,7 +12,6 @@
 namespace Cilex;
 
 use \Symfony\Component\Console;
-use \Symfony\Component\ClassLoader\UniversalClassLoader;
 
 /**
  * The Cilex framework class.
@@ -34,11 +33,13 @@ class Application extends \Pimple
      * @param string      $name    Name for this application.
      * @param string|null $version Version number for this application.
      */
-    function __construct($name, $version = null)
+    public function __construct($name, $version = null)
     {
-        $this['console'] = $this->share(function () use ($name, $version) {
-            return new Console\Application($name, $version);
-        });
+        $this['console'] = $this->share(
+            function () use ($name, $version) {
+                return new Console\Application($name, $version);
+            }
+        );
     }
 
     /**
