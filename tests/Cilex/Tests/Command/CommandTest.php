@@ -34,16 +34,13 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the getContainer and setContainer methods to see whether the
-     * provided Cilex Application is persisted.
+     * Tests the getContainer method.
      */
     public function testContainer()
     {
         $app = new \Cilex\Application('Test');
+        $app->command($this->fixture);
 
-        $this->assertNull($this->fixture->getContainer());
-
-        $this->fixture->setContainer($app);
         $this->assertSame($app, $this->fixture->getContainer());
     }
 
@@ -54,11 +51,11 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testGetService()
     {
         $app = new \Cilex\Application('Test');
-        $this->fixture->setContainer($app);
+        $app->command($this->fixture);
 
         $this->assertInstanceOf(
             '\Symfony\Component\Console\Application',
-            $app['console']
+            $this->fixture->getService('console')
         );
     }
 }
