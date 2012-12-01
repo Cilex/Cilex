@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "PSR-0": {
-            "src/": "Cilex",
+            "src/": "Cilex"
         }
     },
     "require":{
