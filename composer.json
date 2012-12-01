@@ -4,12 +4,12 @@
     "keywords":    ["microframework","cli"],
     "homepage":    "http://cilex.github.com",
     "license":     "MIT",
-    "autoload":{
-        "psr-0":{ "Cilex": "src/" }
-    },
     "authors":[
         { "name":  "Mike van Riel", "email": "mike.vanriel@naenius.com" }
     ],
+    "autoload": {
+        "classmap": [ "src/" ]
+    },
     "require":{
         "php":             ">=5.3.3",
         "pimple/pimple":   "1.0.*",
