@@ -10,6 +10,11 @@
     "authors":[
         { "name":  "Mike van Riel", "email": "mike.vanriel@naenius.com" }
     ],
+    "autoload": {
+        "PSR-0": {
+            "src/": "Cilex",
+        }
+    },
     "require":{
         "php":             ">=5.3.3",
         "pimple/pimple":   "1.0.*",
