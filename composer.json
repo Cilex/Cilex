@@ -10,16 +10,12 @@
     "authors":[
         { "name":  "Mike van Riel", "email": "mike.vanriel@naenius.com" }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/simensen/cilex-console-service-provider.git"
-        }
+    "repositories":[
+        { "type": "git", "url": "https://github.com/Cilex/console-service-provider.git" }
     ],
     "require":{
         "php":                            ">=5.3.3",
         "pimple/pimple":                  "1.0.*",
-        "symfony/console":                "2.1.*",
         "symfony/process":                "2.1.*",
         "symfony/finder":                 "2.1.*",
         "cilex/console-service-provider": "1.*@dev"
