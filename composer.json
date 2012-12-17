@@ -10,9 +10,6 @@
     "authors":[
         { "name":  "Mike van Riel", "email": "mike.vanriel@naenius.com" }
     ],
-    "repositories":[
-        { "type": "git", "url": "https://github.com/Cilex/console-service-provider.git" }
-    ],
     "require":{
         "php":                            ">=5.3.3",
         "pimple/pimple":                  "1.0.*",
