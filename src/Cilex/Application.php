@@ -36,6 +36,7 @@ class Application extends \Pimple
      */
     public function __construct($name, $version = null)
     {
+        parent::__construct();
         $consoleConfig = array('console.name' => $name);
         if (null !== $version) {
             $consoleConfig['console.version'] = $version;
