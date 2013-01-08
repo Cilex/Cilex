@@ -33,10 +33,11 @@ class Application extends \Pimple
      *
      * @param string      $name    Name for this application.
      * @param string|null $version Version number for this application.
+     * @param array       $values  Optional values array for the container
      */
-    public function __construct($name, $version = null)
+    public function __construct($name, $version = null, array $values = array())
     {
-        parent::__construct();
+        parent::__construct($values);
         $consoleConfig = array('console.name' => $name);
         if (null !== $version) {
             $consoleConfig['console.version'] = $version;
