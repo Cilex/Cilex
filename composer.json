@@ -18,7 +18,8 @@
         "cilex/console-service-provider": "1.*@dev"
     },
     "require-dev":{
-        "symfony/validator": "2.1.*"
+        "symfony/validator": "2.1.*",
+        "phpunit/phpunit":   "3.7.*"
     },
     "suggest":{
         "monolog/monolog":   ">=1.0.0",
