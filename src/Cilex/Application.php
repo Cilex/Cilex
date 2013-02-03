@@ -34,14 +34,19 @@ class Application extends \Pimple
      * @param string      $name    Name for this application.
      * @param string|null $version Version number for this application.
      */
-    public function __construct($name, $version = null)
+    public function __construct($name, $version = null, array $values = array())
     {
         parent::__construct();
+
         $consoleConfig = array('console.name' => $name);
         if (null !== $version) {
             $consoleConfig['console.version'] = $version;
         }
         $this->register(new ConsoleServiceProvider(), $consoleConfig);
+
+        foreach ($values as $key => $value) {
+            $this[$key] = $value;
+        }
     }
 
     /**
