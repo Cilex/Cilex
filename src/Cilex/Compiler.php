@@ -55,6 +55,7 @@ class Compiler
             ->notName('Compiler.php')
             ->in(__DIR__.'/..')
             ->in(__DIR__.'/../../vendor/pimple/pimple/lib')
+            ->in(__DIR__.'/../../vendor/cilex/console-service-provider')
             ->in(__DIR__.'/../../vendor/symfony/console/Symfony/Component/Console');
 
         foreach ($finder as $file) {
