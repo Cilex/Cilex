@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Validator;
 use Symfony\Component\Validator\Mapping\ClassMetadataFactory;
 use Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader;
 use Symfony\Component\Validator\ConstraintValidatorFactory;
+use Symfony\Component\Validator\DefaultTranslator;
 
 /**
  * Symfony Validator component Provider.
@@ -36,7 +37,8 @@ class ValidatorServiceProvider implements ServiceProviderInterface
             function () use ($app) {
                 return new Validator(
                     $app['validator.mapping.class_metadata_factory'],
-                    $app['validator.validator_factory']
+                    $app['validator.validator_factory'],
+                    $app['validator.default_translator']
                 );
             }
         );
@@ -50,6 +52,16 @@ class ValidatorServiceProvider implements ServiceProviderInterface
         $app['validator.validator_factory'] = $app->share(
             function () {
                 return new ConstraintValidatorFactory();
+            }
+        );
+
+        $app['validator.default_translator'] = $app->share(
+            function () {
+                if (!class_exists('Symfony\\Component\\Validator\\DefaultTranslator')){
+                    return array();
+                }
+                
+                return new DefaultTranslator();
             }
         );
 
