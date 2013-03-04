@@ -7,7 +7,7 @@ node default {
       command => "/usr/bin/apt-get update"
     }
 
-    package{["git", "python-setuptools", "wget", "make", "texlive-latex-recommended", "texlive-fonts-recommended", "openjdk-6-jre", "php5-cli", "php5-xdebug"]:
+    package{["git", "python-setuptools", "wget", "make", "texlive-latex-recommended", "texlive-latex-extra", "texlive-fonts-recommended", "openjdk-6-jre", "php5-cli", "php5-xdebug"]:
         ensure  => present,
         require => Exec["apt-get update"]
     }
