@@ -29,6 +29,25 @@ web micro-framework by Fabien Potencier.
 Read the [documentation][4] for more information.
 -->
 
+## Usage
+
+ - Download composer: `curl -s https://getcomposer.org/installer | php`
+ - Add to your dependencies:  `php composer.phar require cilex/cilex dev-master`
+ - Update the dependencies
+ - Create a `run.php` file
+
+```php
+<?php
+if (!$loader = include __DIR__.'/vendor/autoload.php') {
+    die('You must set up the project dependencies.')
+}
+$app = new \Cilex\Application('Cilex');
+$app->command(new \Cilex\Command\GreetCommand());
+$app->run();
+```
+ - `php run.php`
+ - enjoy a lot.
+
 ## License
 
 Cilex is licensed under the MIT license.
