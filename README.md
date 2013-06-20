@@ -39,7 +39,7 @@ Read the [documentation][4] for more information.
 ```php
 <?php
 if (!$loader = include __DIR__.'/vendor/autoload.php') {
-    die('You must set up the project dependencies.')
+    die('You must set up the project dependencies.');
 }
 $app = new \Cilex\Application('Cilex');
 $app->command(new \Cilex\Command\GreetCommand());
