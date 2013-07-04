@@ -79,9 +79,4 @@ Even without actual commands you are greeted with an informative description wha
       help   Displays help for a command
       list   Lists commands
 
-Commands
---------
-
-.. note:: this chapter needs to be written
-
 .. _Composer: http://getcomposer.org
