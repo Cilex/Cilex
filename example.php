@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/cilex.phar';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new \Cilex\Application('Cilex');
-$app->command(new \Cilex\Command\GreetCommand());
+//$app->command(new \Cilex\Command\GreetCommand());
 $app->run();
