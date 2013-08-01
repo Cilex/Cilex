@@ -15,7 +15,7 @@
         "pimple/pimple":                  "1.0.*",
         "symfony/process":                "~2.1",
         "symfony/finder":                 "~2.1",
-        "cilex/console-service-provider": "1.*@dev"
+        "cilex/console-service-provider": "~1.0"
     },
     "require-dev":{
         "symfony/validator": "~2.1",
