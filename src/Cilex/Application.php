@@ -26,7 +26,7 @@ class Application extends \Pimple
     /**
      * Version number for Cilex
      */
-    const VERSION = '1.0.0';
+    const VERSION = '2.0-dev';
 
     /**
      * Registers the autoloader and necessary components.
