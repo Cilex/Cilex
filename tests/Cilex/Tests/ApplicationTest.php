@@ -44,6 +44,19 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::VERSION, $this->app['console']->getVersion());
     }
 
+    public function testCustomInputOutput()
+    {
+        $input = $this->getMock('Symfony\Component\Console\Input\InputInterface');
+        $output = $this->getMock('Symfony\Component\Console\Output\OutputInterface');
+
+        $this->app['console'] = $this->getMock('Symfony\Component\Console\Application');
+        $this->app['console']->expects($this->once())->method('run')->with($input, $output);
+
+
+        $this->app->run($input, $output);
+
+    }
+
     /**
      * Tests the command method to see if the command is properly set and the
      * Cilex application is added as container.

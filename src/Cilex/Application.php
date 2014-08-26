@@ -13,11 +13,12 @@ namespace Cilex;
 
 use Cilex\Provider\ConsoleServiceProvider;
 use Cilex\Provider\DispatcherServiceProvider;
+use Pimple\ServiceProviderInterface;
 use Silex\Api\BootableProviderInterface;
 use Silex\Api\EventListenerProviderInterface;
-use Pimple\ServiceProviderInterface;
-use Symfony\Component\Console\Shell;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * The Cilex framework class.
@@ -77,14 +78,15 @@ class Application extends \Pimple\Container
      * Executes this application.
      *
      * @param bool $interactive runs in an interactive shell if true.
-     * @return void
+     * @param InputInterface|null $input
+     * @param OutputInterface|null $output
+     * @return integer
      */
-    public function run($interactive = false)
+    public function run(InputInterface $input = null, OutputInterface $output = null)
     {
         $this->boot();
 
-        $console = $interactive ? $this['console'] : new Shell($this['console']);
-        $console->run();
+        return $this['console']->run($input, $output);
     }
 
     /**

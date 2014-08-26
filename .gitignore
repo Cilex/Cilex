@@ -3,3 +3,4 @@ phpunit.xml
 cilex.phar
 docs/.build
 composer.lock
+.vagrant
