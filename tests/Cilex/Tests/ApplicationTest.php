@@ -11,26 +11,8 @@
 
 namespace Cilex\Tests;
 
-use \Cilex\Application;
-
-/**
- * Mock class used to test the register method.
- */
-class ServiceProviderMock implements \Cilex\ServiceProviderInterface
-{
-    /**
-     * Mock method to satisfy interface
-     *
-     * @param \Cilex\Application $app
-     *
-     * @return void
-     */
-    function register(\Cilex\Application $app)
-    {
-        $app['mock.param'] = false;
-        $app['mock'] = $this;
-    }
-}
+use Cilex\Application;
+use Cilex\Command\GreetCommand;
 
 /**
  * Application test cases.
@@ -42,15 +24,12 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     const NAME    = 'Test';
     const VERSION = '1.0.1';
 
-    /** @var \Cilex\Application */
-    protected $fixture = null;
-
     /**
-     * Sets up the test fixture.
+     * Sets up the test app.
      */
     public function setUp()
     {
-        $this->fixture = new Application(self::NAME, self::VERSION);
+        $this->app = new Application(self::NAME, self::VERSION);
     }
 
     /**
@@ -59,13 +38,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->assertInstanceOf(
-            '\\Symfony\\Component\\Console\\Application',
-            $this->fixture['console']
-        );
+        $this->assertInstanceOf('Symfony\Component\Console\Application', $this->app['console']);
 
-        $this->assertEquals(self::NAME, $this->fixture['console']->getName());
-        $this->assertEquals(self::VERSION, $this->fixture['console']->getVersion());
+        $this->assertEquals(self::NAME, $this->app['console']->getName());
+        $this->assertEquals(self::VERSION, $this->app['console']->getVersion());
     }
 
     /**
@@ -74,26 +50,13 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function testCommand()
     {
-        $this->assertFalse($this->fixture['console']->has('demo:greet'));
-        $this->fixture->command(new \Cilex\Command\GreetCommand());
-        $this->assertTrue($this->fixture['console']->has('demo:greet'));
+        $this->assertFalse($this->app['console']->has('demo:greet'));
 
-        $this->assertSame(
-            $this->fixture,
-            $this->fixture['console']->get('demo:greet')->getContainer()
-        );
+        $this->app->command(new GreetCommand());
+
+        $this->assertTrue($this->app['console']->has('demo:greet'));
+
+        $this->assertSame($this->app, $this->app['console']->get('demo:greet')->getContainer());
     }
 
-    /**
-     * Tests whether the register method applies the provided parameters to this
-     * application and correctly registers the ServiceProvider.
-     */
-    public function testRegister()
-    {
-        $provider = new ServiceProviderMock();
-        $this->fixture->register($provider, array('mock.param' => true));
-
-        $this->assertTrue($this->fixture['mock.param']);
-        $this->assertSame($this->fixture['mock'], $provider);
-    }
 }

@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Example command for testing purposes.
  */
-class GreetCommand extends Command
+class GreetCommand extends \Cilex\Provider\Console\Command
 {
     protected function configure()
     {
@@ -32,8 +32,9 @@ class GreetCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $text = 'Hello';
         $name = $input->getArgument('name');
+        $text = 'Hello';
+
         if ($name) {
             $text .= ' '.$name;
         }

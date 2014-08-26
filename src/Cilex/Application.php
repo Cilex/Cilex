@@ -11,8 +11,13 @@
 
 namespace Cilex;
 
-use \Symfony\Component\Console;
-use \Cilex\Provider\Console\ConsoleServiceProvider;
+use Cilex\Provider\ConsoleServiceProvider;
+use Cilex\Provider\DispatcherServiceProvider;
+use Silex\Api\BootableProviderInterface;
+use Silex\Api\EventListenerProviderInterface;
+use Pimple\ServiceProviderInterface;
+use Symfony\Component\Console\Shell;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * The Cilex framework class.
@@ -21,12 +26,10 @@ use \Cilex\Provider\Console\ConsoleServiceProvider;
  *
  * @api
  */
-class Application extends \Pimple
+class Application extends \Pimple\Container
 {
-    /**
-     * Version number for Cilex
-     */
-    const VERSION = '2.0-dev';
+    private $providers;
+    private $booted = false;
 
     /**
      * Registers the autoloader and necessary components.
@@ -36,16 +39,37 @@ class Application extends \Pimple
      */
     public function __construct($name, $version = null, array $values = array())
     {
-        parent::__construct();
+        parent::__construct($values);
 
-        $consoleConfig = array('console.name' => $name);
-        if (null !== $version) {
-            $consoleConfig['console.version'] = $version;
-        }
-        $this->register(new ConsoleServiceProvider(), $consoleConfig);
+        $this->register(new DispatcherServiceProvider);
+        $this->register(new ConsoleServiceProvider, [
+            'console.name' => $name,
+            'console.version' => $version,
+        ]);
+    }
 
-        foreach ($values as $key => $value) {
-            $this[$key] = $value;
+    public function register(ServiceProviderInterface $provider, array $values = [])
+    {
+        parent::register($provider, $values);
+
+        $this->providers[] = $provider;
+    }
+
+    public function boot()
+    {
+        if (!$this->booted) {
+            $this->booted = true;
+
+            foreach ($this->providers as $provider) {
+                if ($provider instanceof EventListenerProviderInterface) {
+                    $provider->subscribe($this, $this['dispatcher']);
+                }
+
+                if ($provider instanceof BootableProviderInterface) {
+                    $provider->boot($this);
+                }
+            }
+
         }
     }
 
@@ -53,17 +77,14 @@ class Application extends \Pimple
      * Executes this application.
      *
      * @param bool $interactive runs in an interactive shell if true.
-     *
      * @return void
      */
     public function run($interactive = false)
     {
-        $app = $this['console'];
-        if ($interactive) {
-            $app = new Console\Shell($app);
-        }
+        $this->boot();
 
-        $app->run();
+        $console = $interactive ? $this['console'] : new Shell($this['console']);
+        $console->run();
     }
 
     /**
@@ -72,40 +93,11 @@ class Application extends \Pimple
      * If a command with the same name already exists, it will be overridden.
      *
      * @param \Cilex\Command\Command $command A Command object
-     *
      * @api
-     *
      * @return void
      */
-    public function command(Console\Command\Command $command)
+    public function command(Command $command)
     {
         $this['console']->add($command);
-    }
-
-    /**
-     * Registers a service provider.
-     *
-     * @param \Cilex\ServiceProviderInterface|\Silex\ServiceProviderInterface $provider
-     *     A ServiceProviderInterface instance
-     * @param mixed[]                                                         $values
-     *     An array of values that customizes the provider
-     *
-     * @return void
-     */
-    public function register($provider, array $values = array())
-    {
-        if ((!$provider instanceof \Cilex\ServiceProviderInterface)
-            && (!$provider instanceof \Silex\ServiceProviderInterface)
-        ) {
-            throw new \InvalidArgumentException(
-                'Extensions should implement either Cilex or Silex\' ServiceProviderInterface'
-            );
-        }
-
-        $provider->register($this);
-
-        foreach ($values as $key => $value) {
-            $this[$key] = $value;
-        }
     }
 }
