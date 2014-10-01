@@ -54,6 +54,7 @@ class Compiler
             ->name('*.php')
             ->notName('Compiler.php')
             ->in(__DIR__.'/..')
+            ->in(__DIR__.'/../../vendor/composer')
             ->in(__DIR__.'/../../vendor/pimple/pimple/lib')
             ->in(__DIR__.'/../../vendor/cilex/console-service-provider')
             ->in(__DIR__.'/../../vendor/symfony/console/Symfony/Component/Console');
@@ -65,10 +66,6 @@ class Compiler
         $this->addFile($phar, new \SplFileInfo(__DIR__.'/../../LICENSE'), false);
 
         $this->addFile($phar, new \SplFileInfo(__DIR__.'/../../vendor/autoload.php'));
-        $this->addFile($phar, new \SplFileInfo(__DIR__.'/../../vendor/composer/ClassLoader.php'));
-        $this->addFile($phar, new \SplFileInfo(__DIR__.'/../../vendor/composer/autoload_real.php'));
-        $this->addFile($phar, new \SplFileInfo(__DIR__.'/../../vendor/composer/autoload_namespaces.php'));
-        $this->addFile($phar, new \SplFileInfo(__DIR__.'/../../vendor/composer/autoload_classmap.php'));
 
         // Stubs
         $phar->setStub($this->getStub());
