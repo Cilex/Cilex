@@ -49,6 +49,9 @@ class Application extends \Pimple\Container
         ]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function register(ServiceProviderInterface $provider, array $values = [])
     {
         parent::register($provider, $values);
@@ -62,15 +65,14 @@ class Application extends \Pimple\Container
             $this->booted = true;
 
             foreach ($this->providers as $provider) {
-                if ($provider instanceof EventListenerProviderInterface) {
-                    $provider->subscribe($this, $this['dispatcher']);
-                }
-
                 if ($provider instanceof BootableProviderInterface) {
                     $provider->boot($this);
                 }
-            }
 
+                if ($provider instanceof EventListenerProviderInterface) {
+                    $provider->subscribe($this, $this['dispatcher']);
+                }
+            }
         }
     }
 
