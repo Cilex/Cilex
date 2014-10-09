@@ -1,9 +1,8 @@
 <?php
-
 /*
  * This file is part of the Cilex framework.
  *
- * (c) Mike van Riel <mike.vanriel@naenius.com>
+ * (c) Mike van Riel <me@mikevanriel.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,9 +12,8 @@ namespace Cilex\Provider;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-
-use Cilex\Application;
-use Cilex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 
 /**
  * Monolog Provider.
@@ -24,20 +22,17 @@ use Cilex\ServiceProviderInterface;
  * Fabien Potencier.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Mike van Riel <mike.vanvriel@naenius.com>
  */
 class MonologServiceProvider implements ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Container $app)
     {
-        $app['monolog'] = $app->share(
-            function () use ($app) {
-                $log = new Logger(isset($app['monolog.name']) ? $app['monolog.name'] : 'myapp');
-                $app['monolog.configure']($log);
+        $app['monolog'] = function () use ($app) {
+            $log = new Logger(isset($app['monolog.name']) ? $app['monolog.name'] : 'myapp');
+            $app['monolog.configure']($log);
 
-                return $log;
-            }
-        );
+            return $log;
+        };
 
         $app['monolog.configure'] = $app->protect(
             function ($log) use ($app) {
@@ -45,9 +40,11 @@ class MonologServiceProvider implements ServiceProviderInterface
             }
         );
 
-        $app['monolog.handler'] = function () use ($app) {
-            return new StreamHandler($app['monolog.logfile'], $app['monolog.level']);
-        };
+        $app['monolog.handler'] = $app->factory(
+            function () use ($app) {
+                return new StreamHandler($app['monolog.logfile'], $app['monolog.level']);
+            }
+        );
 
         if (!isset($app['monolog.level'])) {
             $app['monolog.level'] = function () {

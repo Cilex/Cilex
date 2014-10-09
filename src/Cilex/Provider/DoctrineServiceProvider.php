@@ -1,9 +1,8 @@
 <?php
-
 /*
  * This file is part of the Cilex framework.
  *
- * (c) Mike van Riel <mike.vanriel@naenius.com>
+ * (c) Mike van Riel <me@mikevanriel.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,11 +10,11 @@
 
 namespace Cilex\Provider;
 
-use Cilex\Application;
-use Cilex\ServiceProviderInterface;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Configuration;
 use Doctrine\Common\EventManager;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 
 /**
  * Doctrine DBAL Provider.
@@ -24,11 +23,10 @@ use Doctrine\Common\EventManager;
  * Silex written by Fabien Potencier.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Mike van Riel <mike.vanriel@naenius.com>
  */
 class DoctrineServiceProvider implements ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Container $app)
     {
         $app['db.default_options'] = array(
             'driver'   => 'pdo_mysql',
@@ -64,78 +62,66 @@ class DoctrineServiceProvider implements ServiceProviderInterface
             }
         );
 
-        $app['dbs'] = $app->share(
-            function () use ($app) {
-                $app['dbs.options.initializer']();
+        $app['dbs'] = function () use ($app) {
+            $app['dbs.options.initializer']();
 
-                $dbs = new \Pimple();
-                foreach ($app['dbs.options'] as $name => $options) {
-                    if ($app['dbs.default'] === $name) {
-                        // we use shortcuts here in case the default has been overriden
-                        $config = $app['db.config'];
-                        $manager = $app['db.event_manager'];
-                    } else {
-                        $config = $app['dbs.config'][$name];
-                        $manager = $app['dbs.event_manager'][$name];
-                    }
-
-                    $dbs[$name] = DriverManager::getConnection($options, $config, $manager);
+            $dbs = new \Pimple\Container();
+            foreach ($app['dbs.options'] as $name => $options) {
+                if ($app['dbs.default'] === $name) {
+                    // we use shortcuts here in case the default has been overriden
+                    $config = $app['db.config'];
+                    $manager = $app['db.event_manager'];
+                } else {
+                    $config = $app['dbs.config'][$name];
+                    $manager = $app['dbs.event_manager'][$name];
                 }
 
-                return $dbs;
+                $dbs[$name] = DriverManager::getConnection($options, $config, $manager);
             }
-        );
 
-        $app['dbs.config'] = $app->share(
-            function () use ($app) {
-                $app['dbs.options.initializer']();
+            return $dbs;
+        };
 
-                $configs = new \Pimple();
-                foreach ($app['dbs.options'] as $name => $options) {
-                    $configs[$name] = new Configuration();
-                }
+        $app['dbs.config'] = function () use ($app) {
+            $app['dbs.options.initializer']();
 
-                return $configs;
+            $configs = new \Pimple\Container();
+            foreach ($app['dbs.options'] as $name => $options) {
+                $configs[$name] = new Configuration();
             }
-        );
 
-        $app['dbs.event_manager'] = $app->share(
-            function () use ($app) {
-                $app['dbs.options.initializer']();
+            return $configs;
+        };
 
-                $managers = new \Pimple();
-                foreach ($app['dbs.options'] as $name => $options) {
-                    $managers[$name] = new EventManager();
-                }
+        $app['dbs.event_manager'] = function () use ($app) {
+            $app['dbs.options.initializer']();
 
-                return $managers;
+            $managers = new \Pimple\Container();
+            foreach ($app['dbs.options'] as $name => $options) {
+                $managers[$name] = new EventManager();
             }
-        );
+
+            return $managers;
+        };
 
         // shortcuts for the "first" DB
-        $app['db'] = $app->share(
-            function () use ($app) {
-                $dbs = $app['dbs'];
+        $app['db'] = function () use ($app) {
+            $dbs = $app['dbs'];
 
-                return $dbs[$app['dbs.default']];
-            }
-        );
+            return $dbs[$app['dbs.default']];
+        };
 
-        $app['db.config'] = $app->share(
-            function () use ($app) {
-                $dbs = $app['dbs.config'];
+        $app['db.config'] = function () use ($app) {
+            $dbs = $app['dbs.config'];
 
-                return $dbs[$app['dbs.default']];
-            }
-        );
+            return $dbs[$app['dbs.default']];
+        };
 
-        $app['db.event_manager'] = $app->share(
-            function () use ($app) {
-                $dbs = $app['dbs.event_manager'];
+        $app['db.event_manager'] = function () use ($app) {
+            $dbs = $app['dbs.event_manager'];
 
-                return $dbs[$app['dbs.default']];
-            }
-        );
+            return $dbs[$app['dbs.default']];
+        };
 
         if (isset($app['db.dbal.class_path'])) {
             $app['autoloader']->registerNamespace('Doctrine\\DBAL', $app['db.dbal.class_path']);

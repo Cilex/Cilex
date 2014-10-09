@@ -1,9 +1,8 @@
 <?php
-
 /*
  * This file is part of the Cilex framework.
  *
- * (c) Mike van Riel <mike.vanriel@naenius.com>
+ * (c) Mike van Riel <me@mikevanriel.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,7 +19,6 @@ use Symfony\Component\Process\Process;
  * This is an adapted version of the Silex\Compiler class.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Mike van Riel <mike.vanriel@naenius.com>
  */
 class Compiler
 {

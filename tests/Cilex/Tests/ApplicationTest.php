@@ -12,20 +12,22 @@
 namespace Cilex\Tests;
 
 use \Cilex\Application;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 
 /**
  * Mock class used to test the register method.
  */
-class ServiceProviderMock implements \Cilex\ServiceProviderInterface
+class ServiceProviderMock implements ServiceProviderInterface
 {
     /**
      * Mock method to satisfy interface
      *
-     * @param \Cilex\Application $app
+     * @param Container $app
      *
      * @return void
      */
-    function register(\Cilex\Application $app)
+    function register(Container $app)
     {
         $app['mock.param'] = false;
         $app['mock'] = $this;

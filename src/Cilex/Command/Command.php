@@ -1,9 +1,8 @@
 <?php
-
 /*
  * This file is part of the Cilex framework.
  *
- * (c) Mike van Riel <mike.vanriel@naenius.com>
+ * (c) Mike van Riel <me@mikevanriel.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,16 +10,15 @@
 
 namespace Cilex\Command;
 
-use \Symfony\Component\Console;
+use Symfony\Component\Console;
+use Symfony\Component\Console\Command\Command as BaseCommand;
 
 /**
  * Base class for Cilex commands.
  *
- * @author Mike van Riel <mike.vanriel@naenius.com>
- *
  * @api
  */
-abstract class Command extends Console\Command\Command
+abstract class Command extends BaseCommand
 {
     /**
      * Returns the application container.
