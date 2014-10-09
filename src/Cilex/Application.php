@@ -29,7 +29,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Application extends \Pimple\Container
 {
-    private $providers;
+    /**
+     * @var ServiceProviderInterface[]
+     */
+    private $providers = array();
+
+    /**
+     * @var boolean
+     */
     private $booted = false;
 
     /**
@@ -59,6 +66,12 @@ class Application extends \Pimple\Container
         $this->providers[] = $provider;
     }
 
+    /**
+     * Boots the Application by calling boot on every provider added and then subscribe
+     * in order to add listeners.
+     *
+     * @return void
+     */
     public function boot()
     {
         if (!$this->booted) {

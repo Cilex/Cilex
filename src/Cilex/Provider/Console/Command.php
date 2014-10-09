@@ -11,6 +11,8 @@
 
 namespace Cilex\Provider\Console;
 
+use Symfony\Component\Console\Command\Command as BaseCommand;
+
 /**
  * Base class for Cilex commands.
  *
@@ -18,7 +20,7 @@ namespace Cilex\Provider\Console;
  *
  * @api
  */
-abstract class Command extends \Symfony\Component\Console\Command\Command
+abstract class Command extends BaseCommand
 {
     /**
      * Returns the application container.
