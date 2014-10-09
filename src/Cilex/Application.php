@@ -43,16 +43,16 @@ class Application extends \Pimple\Container
         parent::__construct($values);
 
         $this->register(new DispatcherServiceProvider);
-        $this->register(new ConsoleServiceProvider, [
+        $this->register(new ConsoleServiceProvider, array(
             'console.name' => $name,
             'console.version' => $version,
-        ]);
+        ));
     }
 
     /**
      * {@inheritDoc}
      */
-    public function register(ServiceProviderInterface $provider, array $values = [])
+    public function register(ServiceProviderInterface $provider, array $values = array())
     {
         parent::register($provider, $values);
 
