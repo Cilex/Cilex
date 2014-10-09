@@ -1,7 +1,6 @@
 vendor
 phpunit.xml
 cilex.phar
-.idea
-composer.phar
-.vagrant
 docs/.build
+composer.lock
+.vagrant

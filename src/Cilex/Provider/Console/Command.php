@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Cilex\Command;
+namespace Cilex\Provider\Console;
 
-use \Symfony\Component\Console;
+use Symfony\Component\Console\Command\Command as BaseCommand;
 
 /**
  * Base class for Cilex commands.
@@ -20,7 +20,7 @@ use \Symfony\Component\Console;
  *
  * @api
  */
-abstract class Command extends Console\Command\Command
+abstract class Command extends BaseCommand
 {
     /**
      * Returns the application container.

@@ -15,12 +15,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Cilex\Provider\Console\Command;
 
 /**
  * Example command for testing purposes.
  */
 class GreetCommand extends Command
 {
+    /**
+     * {@inheritDoc}
+     */
     protected function configure()
     {
         $this
@@ -30,10 +34,14 @@ class GreetCommand extends Command
             ->addOption('yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $text = 'Hello';
         $name = $input->getArgument('name');
+        $text = 'Hello';
+
         if ($name) {
             $text .= ' '.$name;
         }

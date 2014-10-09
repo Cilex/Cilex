@@ -13,13 +13,16 @@ namespace Cilex\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command as BaseCommand;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Example command for testing purposes.
  */
-class DemoInfoCommand extends BaseCommand
+class DemoInfoCommand extends Command
 {
+    /**
+     * {@inheritDoc}
+     */
     protected function configure()
     {
         $this
@@ -27,6 +30,9 @@ class DemoInfoCommand extends BaseCommand
             ->setDescription('Get Application Information');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // This is a contrived example to show accessing services

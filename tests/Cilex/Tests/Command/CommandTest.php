@@ -11,9 +11,10 @@
 
 namespace Cilex\Tests\Command;
 
-use \Cilex\Command;
+use Cilex\Command;
+use Cilex\Application;
 
-class CommandMock extends Command\Command {}
+class CommandMock extends \Cilex\Provider\Console\Command {}
 
 /**
  * Command\Command test cases.
@@ -38,7 +39,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testContainer()
     {
-        $app = new \Cilex\Application('Test');
+        $app = new Application('Test');
         $app->command($this->fixture);
 
         $this->assertSame($app, $this->fixture->getContainer());
@@ -50,12 +51,9 @@ class CommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetService()
     {
-        $app = new \Cilex\Application('Test');
+        $app = new Application('Test');
         $app->command($this->fixture);
 
-        $this->assertInstanceOf(
-            '\Symfony\Component\Console\Application',
-            $this->fixture->getService('console')
-        );
+        $this->assertInstanceOf('Symfony\Component\Console\Application', $this->fixture->getService('console'));
     }
 }
