@@ -4,29 +4,30 @@
     "keywords":    ["microframework","cli"],
     "homepage":    "http://cilex.github.com",
     "license":     "MIT",
-    "autoload":{
-        "psr-0":{ "Cilex": "src/" }
+    "autoload": {
+        "psr-4" : { "Cilex\\": "src/Cilex" }
     },
-    "authors":[
+    "authors": [
         { "name":  "Mike van Riel", "email": "me@mikevanriel.com" }
     ],
-    "require":{
+    "require": {
         "php":                            ">=5.3.3",
-        "pimple/pimple":                  "~1.0",
-        "symfony/process":                "~2.1",
-        "symfony/finder":                 "~2.1",
-        "cilex/console-service-provider": "1.*"
+        "pimple/pimple":                  "~3.0",
+        "symfony/event-dispatcher": ">=2.4,<2.6-dev",
+        "symfony/process":                "~2.5",
+        "symfony/finder":                 "~2.5",
+        "cilex/console-service-provider": "~1.1"
     },
-    "require-dev":{
-        "symfony/validator": "~2.1",
-        "phpunit/phpunit":   "3.7.*"
+    "require-dev": {
+        "symfony/validator": "~2.5",
+        "phpunit/phpunit":   "~3.7"
     },
-    "suggest":{
+    "suggest": {
         "monolog/monolog":   ">=1.0.0",
-        "symfony/yaml":      ">=1.0.0",
+        "symfony/yaml":      "~2.4",
         "symfony/validator": ">=1.0.0"
     },
-    "extra":{
+    "extra": {
         "branch-alias": { "dev-develop": "2.0-dev" }
     }
 }

@@ -1,9 +1,8 @@
 <?php
-
 /*
  * This file is part of the Cilex framework.
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ * (c) Mike van Riel <me@mikevanriel.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,9 +10,8 @@
 
 namespace Cilex\Provider;
 
-use Cilex\Application;
-use Cilex\ServiceProviderInterface;
-
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Validator\Mapping\ClassMetadataFactory;
 use Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader;
@@ -27,43 +25,34 @@ use Symfony\Component\Validator\DefaultTranslator;
  * Fabien Potencier.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Mike van Riel <mike.vanvriel@naenius.com>
  */
 class ValidatorServiceProvider implements ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Container $app)
     {
-        $app['validator'] = $app->share(
-            function () use ($app) {
-                return new Validator(
-                    $app['validator.mapping.class_metadata_factory'],
-                    $app['validator.validator_factory'],
-                    $app['validator.default_translator']
-                );
-            }
-        );
+        $app['validator'] = function () use ($app) {
+            return new Validator(
+                $app['validator.mapping.class_metadata_factory'],
+                $app['validator.validator_factory'],
+                $app['validator.default_translator']
+            );
+        };
 
-        $app['validator.mapping.class_metadata_factory'] = $app->share(
-            function () use ($app) {
-                return new ClassMetadataFactory(new StaticMethodLoader());
-            }
-        );
+        $app['validator.mapping.class_metadata_factory'] = function () use ($app) {
+            return new ClassMetadataFactory(new StaticMethodLoader());
+        };
 
-        $app['validator.validator_factory'] = $app->share(
-            function () {
-                return new ConstraintValidatorFactory();
-            }
-        );
+        $app['validator.validator_factory'] = function () {
+            return new ConstraintValidatorFactory();
+        };
 
-        $app['validator.default_translator'] = $app->share(
-            function () {
-                if (!class_exists('Symfony\\Component\\Validator\\DefaultTranslator')){
-                    return array();
-                }
-                
-                return new DefaultTranslator();
+        $app['validator.default_translator'] = function () {
+            if (!class_exists('Symfony\\Component\\Validator\\DefaultTranslator')){
+                return array();
             }
-        );
+
+            return new DefaultTranslator();
+        };
 
         if (isset($app['validator.class_path'])) {
             $app['autoloader']->registerNamespace('Symfony\\Component\\Validator', $app['validator.class_path']);
