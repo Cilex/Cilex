@@ -19,7 +19,8 @@
         "silex/api"                : "2.0.x-dev",
         "symfony/process"          : "~2.4",
         "symfony/console"          : "~2.4",
-        "symfony/event-dispatcher" : "~2.4"
+        "symfony/event-dispatcher" : "~2.4",
+        "symfony/yaml"             : "~2.5"
     },
 
     "require-dev" : {
