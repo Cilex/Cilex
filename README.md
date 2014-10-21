@@ -6,7 +6,9 @@ based on [Symfony2][1] components:
 
 ```php
 <?php
-require_once __DIR__.'/cilex.phar';
+if (!$loader = include __DIR__.'/vendor/autoload.php') {
+    die('You must set up the project dependencies.');
+}
 
 $app = new \Cilex\Application('Cilex');
 $app->command(new \Cilex\Command\GreetCommand());
@@ -21,7 +23,6 @@ web micro-framework by Fabien Potencier.
  1. `git clone` _this_ repository.
  2. Download composer: `curl -s https://getcomposer.org/installer | php`
  3. Install Cilex' dependencies: `php composer.phar install`
- 4. Create the phar: `php ./compile`
 
 <!--
 ## More Information
