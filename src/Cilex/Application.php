@@ -74,17 +74,19 @@ class Application extends \Pimple\Container
      */
     public function boot()
     {
-        if (!$this->booted) {
-            $this->booted = true;
+        if ($this->booted) {
+            return;
+        }
 
-            foreach ($this->providers as $provider) {
-                if ($provider instanceof BootableProviderInterface) {
-                    $provider->boot($this);
-                }
+        $this->booted = true;
 
-                if ($provider instanceof EventListenerProviderInterface) {
-                    $provider->subscribe($this, $this['dispatcher']);
-                }
+        foreach ($this->providers as $provider) {
+            if ($provider instanceof BootableProviderInterface) {
+                $provider->boot($this);
+            }
+
+            if ($provider instanceof EventListenerProviderInterface) {
+                $provider->subscribe($this, $this['dispatcher']);
             }
         }
     }
