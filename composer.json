@@ -15,8 +15,7 @@
 
     "require" : {
         "php"                      : ">=5.3.3",
-        "pimple/pimple"            : "3.0.0 as 2.1.0",
-        "silex/api"                : "2.0.x-dev",
+        "pimple/pimple"            : "3.0.*",
         "symfony/process"          : "~2.4",
         "symfony/console"          : "~2.4",
         "symfony/event-dispatcher" : "~2.4"
