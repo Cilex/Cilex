@@ -1,0 +1,19 @@
+{
+  "alias": "cilex.phar",
+  "chmod": "0755",
+  "directories": ["src"],
+  "files": [
+    "LICENSE"
+  ],
+  "finder": [
+    {
+      "name": "*.php",
+      "exclude": ["Tests"],
+      "in": "vendor"
+    }
+  ],
+  "git-version": "1.1.1",
+  "main": "bin/run.php",
+  "output": "cilex.phar",
+  "stub": true
+}

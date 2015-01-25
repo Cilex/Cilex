@@ -31,7 +31,7 @@ class GreetCommand extends Command
             ->setName('demo:greet')
             ->setDescription('Greet someone')
             ->addArgument('name', InputArgument::OPTIONAL, 'Who do you want to greet?')
-            ->addOption('yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters');
+            ->addOption('yell', 'y', InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters');
     }
 
     /**

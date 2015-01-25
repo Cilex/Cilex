@@ -11,12 +11,15 @@
 
 namespace Cilex\Provider\Console;
 
+use Pimple\Container;
+use Symfony\Component\Console\Application;
+
 /**
  * Cilex Pimple Console Application
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class ContainerAwareApplication extends \Symfony\Component\Console\Application
+class ContainerAwareApplication extends Application
 {
     private $pimple;
 
@@ -34,11 +37,11 @@ class ContainerAwareApplication extends \Symfony\Component\Console\Application
     /**
      * Sets a pimple instance onto this application.
      *
-     * @param \Pimple\Container $pimple
+     * @param Container $pimple
      *
      * @return void
      */
-    public function setContainer(\Pimple\Container $pimple)
+    public function setContainer(Container $pimple)
     {
         $this->pimple = $pimple;
     }
@@ -46,7 +49,7 @@ class ContainerAwareApplication extends \Symfony\Component\Console\Application
     /**
      * Get the Container.
      *
-     * @return \Pimple\Container
+     * @return Container
      */
     public function getContainer()
     {
