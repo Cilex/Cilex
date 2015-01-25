@@ -1,0 +1,8 @@
+---
+- name: Install Texlive and its Packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - texlive-latex-recommended
+    - texlive-latex-extra
+    - texlive-fonts-recommended

@@ -1,0 +1,13 @@
+---
+- name: Install php5 and php5-cli
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php5
+    - php5-cli
+    - php5-curl
+    - php5-mcrypt
+    - php5-xdebug
+
+- name: Symlink php5-mcrypt.ini to the PHP Main Config
+  file: src=/etc/php5/mods-available/mcrypt.ini dest=/etc/php5/cli/conf.d/05-mcrypt.ini state=link

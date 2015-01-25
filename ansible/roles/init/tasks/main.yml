@@ -1,0 +1,19 @@
+---
+- name: Update Ubuntu
+  sudo: yes
+  command: apt-get update -y
+
+- name: Upgrade any missing Ubuntu Packages
+  sudo: yes
+  command: apt-get upgrade -y
+
+- name: Install System Packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - curl
+    - wget
+    - vim
+    - git
+    - make
+    - python-setuptools

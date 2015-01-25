@@ -1,0 +1,4 @@
+---
+- name: Install Spinx
+  sudo: yes
+  easy_install: name=sphinx

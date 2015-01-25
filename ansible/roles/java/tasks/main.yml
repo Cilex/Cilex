@@ -1,0 +1,6 @@
+---
+- name: Install OpenJDK
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - openjdk-6-jre

@@ -1,0 +1,13 @@
+- name: Install Composer
+  shell: >
+    curl -sS https://getcomposer.org/installer | php
+    creates={{ composer_path }}
+
+- name: Prepare composer for Global Executable
+  command: creates={{ composer_path }} mv composer.phar {{ composer_path }}
+
+- name: Composer Self Update
+  shell: composer self-update
+
+- name: Run Composer in Project Location
+  composer: command="install --dev" working_dir=/vagrant
