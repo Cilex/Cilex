@@ -14,7 +14,6 @@ namespace Cilex;
 use Cilex\Provider\ConsoleServiceProvider;
 use Cilex\Provider\DispatcherServiceProvider;
 use Pimple\ServiceProviderInterface;
-use Silex\Api\BootableProviderInterface;
 use Silex\Api\EventListenerProviderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -81,10 +80,6 @@ class Application extends \Pimple\Container
         $this->booted = true;
 
         foreach ($this->providers as $provider) {
-            if ($provider instanceof BootableProviderInterface) {
-                $provider->boot($this);
-            }
-
             if ($provider instanceof EventListenerProviderInterface) {
                 $provider->subscribe($this, $this['dispatcher']);
             }
