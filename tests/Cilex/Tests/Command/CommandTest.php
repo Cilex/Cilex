@@ -40,7 +40,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testContainer()
     {
         $app = new Application('Test');
-        $app->command($this->fixture);
+        $app->add($this->fixture);
 
         $this->assertSame($app, $this->fixture->getContainer());
     }
@@ -52,7 +52,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testGetService()
     {
         $app = new Application('Test');
-        $app->command($this->fixture);
+        $app->add($this->fixture);
 
         $this->assertInstanceOf('Symfony\Component\Console\Application', $this->fixture->getService('console'));
     }

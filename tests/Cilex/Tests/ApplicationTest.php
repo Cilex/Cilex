@@ -57,6 +57,24 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testClosureCommand()
+    {
+        $invoked = false;
+        $command = $this->app->command('closure-command', function () use (&$invoked) {
+            $invoked = true;
+        });
+
+        $this->assertInstanceOf('Symfony\Component\Console\Command\Command', $command);
+        $this->assertTrue($this->app['console']->has('closure-command'));
+
+        $command->run(
+            $this->getMock('Symfony\Component\Console\Input\InputInterface'),
+            $this->getMock('Symfony\Component\Console\Output\OutputInterface')
+        );
+
+        $this->assertTrue($invoked);
+    }
+
     /**
      * Tests the command method to see if the command is properly set and the
      * Cilex application is added as container.
@@ -65,7 +83,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->app['console']->has('demo:greet'));
 
-        $this->app->command(new GreetCommand());
+        $this->app->add(new GreetCommand());
 
         $this->assertTrue($this->app['console']->has('demo:greet'));
 
