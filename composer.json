@@ -16,7 +16,6 @@
     "require" : {
         "php"                      : ">=5.5.9",
         "pimple/pimple"            : "^3.0",
-        "silex/api"                : "^2.0@dev",
         "symfony/process"          : "^2.7",
         "symfony/console"          : "^2.7",
         "symfony/event-dispatcher" : "^2.7"
