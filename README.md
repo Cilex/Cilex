@@ -72,7 +72,7 @@ Cilex is licensed under the MIT license.
 [2]: http://silex.sensiolabs.org
 [3]: http://cilex.github.com/get/cilex.phar
 [4]: http://cilex.github.com/documentation
-[5]: http://box-project.org/
+[5]: https://box-project.github.io/box2/
 
 ## FAQ
 
