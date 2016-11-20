@@ -33,7 +33,7 @@ Read the [documentation][4] for more information.
 ## Usage
 
  - Download composer: `curl -s https://getcomposer.org/installer | php`
- - Add to your dependencies:  `php composer.phar require cilex/cilex dev-master`
+ - Add to your dependencies:  `php composer.phar require cilex/cilex dev-develop`
  - Update the dependencies
  - Create a `run.php` file
 
