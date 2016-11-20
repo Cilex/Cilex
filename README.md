@@ -15,7 +15,7 @@ $app->command(new \Cilex\Command\GreetCommand());
 $app->run();
 ```
 
-Cilex works with PHP 5.3.3 or later and is heavily inspired on the [Silex][2]
+Cilex works with PHP 5.5.9 or later and is heavily inspired by the [Silex][2]
 web micro-framework by Fabien Potencier.
 
 ## Installation
