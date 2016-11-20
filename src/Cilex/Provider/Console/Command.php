@@ -16,6 +16,8 @@ use Symfony\Component\Console\Command\Command as BaseCommand;
 /**
  * Base class for Cilex commands.
  *
+ * @method ContainerAwareApplication getApplication() Gets the application instance for this command.
+ *
  * @author Mike van Riel <mike.vanriel@naenius.com>
  *
  * @api

@@ -13,7 +13,7 @@ namespace Cilex\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command;
+use Cilex\Provider\Console\Command;
 
 /**
  * Example command for testing purposes.

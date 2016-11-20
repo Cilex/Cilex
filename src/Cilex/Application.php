@@ -13,6 +13,7 @@ namespace Cilex;
 
 use Cilex\Provider\ConsoleServiceProvider;
 use Cilex\Provider\DispatcherServiceProvider;
+use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Api\EventListenerProviderInterface;
 use Symfony\Component\Console\Command\Command;
@@ -26,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @api
  */
-class Application extends \Pimple\Container
+class Application extends Container
 {
     /**
      * @var ServiceProviderInterface[]
@@ -43,16 +44,20 @@ class Application extends \Pimple\Container
      *
      * @param string      $name    Name for this application.
      * @param string|null $version Version number for this application.
+     * @param array       $values
      */
     public function __construct($name, $version = null, array $values = array())
     {
         parent::__construct($values);
 
         $this->register(new DispatcherServiceProvider);
-        $this->register(new ConsoleServiceProvider, array(
-            'console.name' => $name,
-            'console.version' => $version,
-        ));
+        $this->register(
+            new ConsoleServiceProvider,
+            array(
+                'console.name'    => $name,
+                'console.version' => $version,
+            )
+        );
     }
 
     /**
@@ -89,9 +94,9 @@ class Application extends \Pimple\Container
     /**
      * Executes this application.
      *
-     * @param bool $interactive runs in an interactive shell if true.
-     * @param InputInterface|null $input
+     * @param InputInterface|null  $input
      * @param OutputInterface|null $output
+     *
      * @return integer
      */
     public function run(InputInterface $input = null, OutputInterface $output = null)
@@ -107,6 +112,7 @@ class Application extends \Pimple\Container
      * @param string|Command $nameOrCommand
      * @param callable|null $callable Must be a callable if $nameOrCommand is the command's name
      * @return Command The command instance that you can further configure
+     * @api
      */
     public function command($nameOrCommand, $callable = null)
     {
