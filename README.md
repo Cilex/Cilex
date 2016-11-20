@@ -12,6 +12,9 @@ if (!$loader = include __DIR__.'/vendor/autoload.php') {
 
 $app = new \Cilex\Application('Cilex');
 $app->command(new \Cilex\Command\GreetCommand());
+$app->command('foo', function ($input, $output) {
+    $output->writeln('Example output');
+});
 $app->run();
 ```
 
@@ -41,7 +44,7 @@ Read the [documentation][4] for more information.
 ./bin/run.php demo:greet world --yell
 ./bin/run.php demo:info
 ```
- 
+
 ## Creating a PHAR
 
  - Download and install [box][5]:
