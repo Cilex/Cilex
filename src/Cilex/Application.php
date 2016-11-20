@@ -102,16 +102,27 @@ class Application extends \Pimple\Container
     }
 
     /**
-     * Adds a command object.
+     * Allows you to add a command as Command object or as a command name+callable
      *
-     * If a command with the same name already exists, it will be overridden.
-     *
-     * @param \Cilex\Command\Command $command A Command object
-     * @api
-     * @return void
+     * @param string|Command $nameOrCommand
+     * @param callable|null $callable Must be a callable if $nameOrCommand is the command's name
+     * @return Command The command instance that you can further configure
      */
-    public function command(Command $command)
+    public function command($nameOrCommand, $callable = null)
     {
+        if ($nameOrCommand instanceof Command) {
+            $command = $nameOrCommand;
+        } else {
+            if (!is_callable($callable)) {
+                throw new \InvalidArgumentException('$callable must be a valid callable with the command\'s code');
+            }
+
+            $command = new Command($nameOrCommand);
+            $command->setCode($callable);
+        }
+
         $this['console']->add($command);
+
+        return $command;
     }
 }
