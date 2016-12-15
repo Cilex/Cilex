@@ -1,0 +1,12 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    doc_root: /vagrant
+  roles:
+    - init
+    - texlive
+    - java
+    - php
+    - composer
+    - sphinx
