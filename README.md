@@ -81,10 +81,11 @@ Cilex is licensed under the MIT license.
 
 Q: How do I pass configuration into the application?
 
-A: You can do this by adding the following line, where $configPath is the path to the configuration file you want to use:
+A: You can do this by adding the following lines:
 
 ```php
-$app->register(new \Cilex\Provider\ConfigServiceProvider(), array('config.path' => $configPath));
+$app['config.path'] = __DIR__ . '/../config.yml';
+$app->register(new \Cilex\Provider\ConfigServiceProvider());
 ```
 
-The formats currently supported are: YAML, XML and JSON
+The formats currently supported are: PHP, YAML, XML, and JSON
