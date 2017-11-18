@@ -13,16 +13,20 @@ namespace Cilex\Tests;
 
 use Cilex\Application;
 use Cilex\Command\GreetCommand;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Application test cases.
  *
  * @author Mike van Riel <mike.vanriel@naenius.com>
  */
-class ApplicationTest extends \PHPUnit_Framework_TestCase
+class ApplicationTest extends TestCase
 {
     const NAME    = 'Test';
     const VERSION = '1.0.1';
+
+    /** @var  Application */
+    private $app;
 
     /**
      * Sets up the test app.
@@ -46,10 +50,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomInputOutput()
     {
-        $input = $this->getMock('Symfony\Component\Console\Input\InputInterface');
-        $output = $this->getMock('Symfony\Component\Console\Output\OutputInterface');
+        $input = $this->createMock('Symfony\Component\Console\Input\InputInterface');
+        $output = $this->createMock('Symfony\Component\Console\Output\OutputInterface');
 
-        $this->app['console'] = $this->getMock('Symfony\Component\Console\Application');
+        $this->app['console'] = $this->createMock('Symfony\Component\Console\Application');
         $this->app['console']->expects($this->once())->method('run')->with($input, $output);
 
 
@@ -68,8 +72,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->app['console']->has('closure-command'));
 
         $command->run(
-            $this->getMock('Symfony\Component\Console\Input\InputInterface'),
-            $this->getMock('Symfony\Component\Console\Output\OutputInterface')
+            $this->createMock('Symfony\Component\Console\Input\InputInterface'),
+            $this->createMock('Symfony\Component\Console\Output\OutputInterface')
         );
 
         $this->assertTrue($invoked);
@@ -90,4 +94,21 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->app, $this->app['console']->get('demo:greet')->getContainer());
     }
 
+    /**
+     * Returns a test double for the specified class.
+     *
+     * This method ensures compatibility with PHPUnit 4 and can be removed as soon as PHPUnit 4 is not used anymore.
+     *
+     * @param string $originalClassName
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createMock($originalClassName)
+    {
+        return $this->getMockBuilder($originalClassName)
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->getMock();
+    }
 }
