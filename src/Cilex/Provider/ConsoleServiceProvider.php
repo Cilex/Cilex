@@ -27,7 +27,9 @@ class ConsoleServiceProvider implements \Pimple\ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['console'] = function($pimple) {
-            $console = new ContainerAwareApplication($pimple['console.name'], $pimple['console.version']);
+            $name = $pimple['console.name'] ?: 'UNKNOWN';
+            $version = $pimple['console.version'] ?: 'UNKNOWN';
+            $console = new ContainerAwareApplication($name, $version);
             $console->setDispatcher($pimple['dispatcher']);
             $console->setContainer($pimple);
 
