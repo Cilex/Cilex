@@ -11,19 +11,20 @@
 
 namespace Cilex\Tests\Command;
 
-use Cilex\Command;
 use Cilex\Application;
+use Cilex\Provider\Console\Command;
+use PHPUnit\Framework\TestCase;
 
-class CommandMock extends \Cilex\Provider\Console\Command {}
+class CommandMock extends Command {}
 
 /**
  * Command\Command test cases.
  *
  * @author Mike van Riel <mike.vanriel@naenius.com>
  */
-class CommandTest extends \PHPUnit_Framework_TestCase
+class CommandTest extends TestCase
 {
-    /** @var \Cilex\Command\Command */
+    /** @var Command */
     protected $fixture = null;
 
     /**
