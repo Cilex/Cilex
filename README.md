@@ -36,7 +36,6 @@ Read the [documentation][4] for more information.
 ## Usage
 
  - Create your new commands in `src/Cilex/Command/`
- - Add your new commands to `bin/run.php`
  - Run the commands as:
 ```sh
 ./bin/run.php demo:greet world
