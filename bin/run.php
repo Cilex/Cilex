@@ -6,10 +6,12 @@ if (!$loader = include __DIR__ . '/../vendor/autoload.php') {
 }
 
 $app = new \Cilex\Application('Cilex');
-$app->command(new \Cilex\Command\GreetCommand());
-$app->command(new \Cilex\Command\DemoInfoCommand());
-$app->command('foo', function ($input, $output) {
-    $output->writeln('Example output');
-});
+
+foreach (glob(__DIR__ .'/../src/Cilex/Command/*.php') as $commandFile) {
+    $i = pathinfo($commandFile);
+    $className = $i['filename'];
+    $className = '\Cilex\Command\\' . $className;
+    $app->command(new $className());
+}
 
 $app->run();
