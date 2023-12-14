@@ -27,7 +27,7 @@ abstract class Command extends BaseCommand
     /**
      * Returns the application container.
      *
-     * @return \Cilex\Application
+     * @return \Pimple\Container
      */
     public function getContainer()
     {

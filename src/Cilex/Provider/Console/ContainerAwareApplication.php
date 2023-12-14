@@ -29,7 +29,7 @@ class ContainerAwareApplication extends Application
      * @param string $name    The name of the application
      * @param string $version The version of the application
      */
-    public function __construct($name = 'UNKNOWN', $version = 'UNKNOWN')
+    public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
     {
         parent::__construct($name, $version);
     }
@@ -64,13 +64,13 @@ class ContainerAwareApplication extends Application
      *
      * @param string $name Name of the service.
      *
+     * @return mixed|null
+     *@api
+     *
      * @see self::getContainer()
      *
-     * @api
-     *
-     * @return mixed|null
      */
-    public function getService($name)
+    public function getService(string $name)
     {
         return $this->pimple[$name];
     }

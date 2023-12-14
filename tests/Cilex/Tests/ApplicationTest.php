@@ -21,8 +21,8 @@ use Cilex\Command\GreetCommand;
  */
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
-    const NAME    = 'Test';
-    const VERSION = '1.0.1';
+    public const NAME    = 'Test';
+    public const VERSION = '1.0.1';
 
     /**
      * Sets up the test app.
@@ -38,7 +38,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->assertInstanceOf('Symfony\Component\Console\Application', $this->app['console']);
+        $this->assertInstanceOf(\Symfony\Component\Console\Application::class, $this->app['console']);
 
         $this->assertEquals(self::NAME, $this->app['console']->getName());
         $this->assertEquals(self::VERSION, $this->app['console']->getVersion());
@@ -46,10 +46,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomInputOutput()
     {
-        $input = $this->getMock('Symfony\Component\Console\Input\InputInterface');
-        $output = $this->getMock('Symfony\Component\Console\Output\OutputInterface');
+        $input = $this->getMock(\Symfony\Component\Console\Input\InputInterface::class);
+        $output = $this->getMock(\Symfony\Component\Console\Output\OutputInterface::class);
 
-        $this->app['console'] = $this->getMock('Symfony\Component\Console\Application');
+        $this->app['console'] = $this->getMock(\Symfony\Component\Console\Application::class);
         $this->app['console']->expects($this->once())->method('run')->with($input, $output);
 
 
@@ -64,12 +64,12 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             $invoked = true;
         });
 
-        $this->assertInstanceOf('Symfony\Component\Console\Command\Command', $command);
+        $this->assertInstanceOf(\Symfony\Component\Console\Command\Command::class, $command);
         $this->assertTrue($this->app['console']->has('closure-command'));
 
         $command->run(
-            $this->getMock('Symfony\Component\Console\Input\InputInterface'),
-            $this->getMock('Symfony\Component\Console\Output\OutputInterface')
+            $this->getMock(\Symfony\Component\Console\Input\InputInterface::class),
+            $this->getMock(\Symfony\Component\Console\Output\OutputInterface::class)
         );
 
         $this->assertTrue($invoked);
