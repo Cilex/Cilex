@@ -19,7 +19,7 @@ $app->command('foo', function ($input, $output) {
 $app->run();
 ```
 
-Cilex works with PHP 5.5.9 or later and is heavily inspired by the [Silex][2]
+Cilex works with PHP 7.3 or later and is heavily inspired by the [Silex][2]
 web micro-framework by Fabien Potencier.
 
 ## Installation
