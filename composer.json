@@ -1,29 +1,36 @@
 {
     "name"        : "cilex/cilex",
-    "description" : "The PHP micro-framework for Command line tools based on the Symfony2 Components",
+    "description" : "The a form of the PHP micro-framework for Command line tools based on the Symfony2 Components",
     "keywords"    : ["microframework","cli"],
     "homepage"    : "http://cilex.github.com",
     "license"     : "MIT",
-
     "autoload" : {
         "psr-4" : { "Cilex\\": "src/Cilex" }
     },
 
     "authors":[
-        { "name":  "Mike van Riel", "email": "me@mikevanriel.com" }
+        {
+            "name":  "Mike van Riel",
+            "email": "me@mikevanriel.com"
+        },
+        {
+            "name": "Oliver Kucharxzewski",
+            "email": "oliver@olidev.com.au"
+        }
     ],
 
     "require" : {
-        "php"                      : ">=5.5.9",
+        "php"                      : ">=7.3",
         "pimple/pimple"            : "^3.0",
         "silex/api"                : "^2.0",
-        "symfony/process"          : "^2.7 || ^3.0",
-        "symfony/console"          : "^2.7 || ^3.0",
-        "symfony/event-dispatcher" : "^2.7 || ^3.0"
+        "symfony/process"          : "^5.0",
+        "symfony/console"          : "^5.0",
+        "symfony/event-dispatcher" : "^5.0"
     },
 
     "require-dev" : {
-        "phpunit/phpunit" : "~3.7"
+        "rector/rector": "^0.18.12",
+        "phpunit/phpunit": "^9.0"
     },
 
     "suggest" : {

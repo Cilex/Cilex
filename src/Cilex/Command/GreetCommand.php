@@ -51,5 +51,7 @@ class GreetCommand extends Command
         }
 
         $output->writeln($text);
+
+        return 1;
     }
 }

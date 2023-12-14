@@ -32,7 +32,7 @@ class Application extends Container
     /**
      * @var ServiceProviderInterface[]
      */
-    private $providers = array();
+    private $providers = [];
 
     /**
      * @var boolean
@@ -46,24 +46,21 @@ class Application extends Container
      * @param string|null $version Version number for this application.
      * @param array       $values
      */
-    public function __construct($name, $version = null, array $values = array())
+    public function __construct($name, $version = null, array $values = [])
     {
         parent::__construct($values);
 
         $this->register(new DispatcherServiceProvider);
         $this->register(
             new ConsoleServiceProvider,
-            array(
-                'console.name'    => $name,
-                'console.version' => $version,
-            )
+            ['console.name'    => $name, 'console.version' => $version]
         );
     }
 
     /**
      * {@inheritDoc}
      */
-    public function register(ServiceProviderInterface $provider, array $values = array())
+    public function register(ServiceProviderInterface $provider, array $values = [])
     {
         parent::register($provider, $values);
 
