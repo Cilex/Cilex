@@ -13,6 +13,7 @@ namespace Cilex\Tests\Command;
 
 use Cilex\Command;
 use Cilex\Application;
+use PHPUnit\Framework\TestCase;
 
 class CommandMock extends \Cilex\Provider\Console\Command {}
 
@@ -21,7 +22,7 @@ class CommandMock extends \Cilex\Provider\Console\Command {}
  *
  * @author Mike van Riel <mike.vanriel@naenius.com>
  */
-class CommandTest extends \PHPUnit_Framework_TestCase
+class CommandTest extends TestCase
 {
     /** @var \Cilex\Command\Command */
     protected $fixture = null;
@@ -29,7 +30,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the test fixture.
      */
-    public function setUp()
+    public function setUp() : void
     {
         $this->fixture = new CommandMock('demo:test');
     }
@@ -54,6 +55,6 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $app = new Application('Test');
         $app->command($this->fixture);
 
-        $this->assertInstanceOf('Symfony\Component\Console\Application', $this->fixture->getService('console'));
+        $this->assertInstanceOf(\Symfony\Component\Console\Application::class, $this->fixture->getService('console'));
     }
 }

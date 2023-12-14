@@ -1,5 +1,6 @@
 Cilex, a simple Command Line Interface framework
 ================================================
+This project is a fork of the existing Cilex project, and aims to add support for PHP 7 & later Symfony versions.
 
 Cilex is a simple command line application framework to develop simple tools
 based on [Symfony2][1] components:
